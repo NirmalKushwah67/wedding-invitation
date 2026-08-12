@@ -175,20 +175,32 @@ function initEntrySparkles() {
    -------------------------------------------------------------------------- */
 function initPreloader() {
   const preloader = document.getElementById('preloader');
+  const progressFill = document.getElementById('preloader-progress-fill');
+  const statusText = document.getElementById('preloader-status-text');
   if (!preloader) return;
 
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.floor(Math.random() * 15) + 12;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      if (statusText) statusText.textContent = 'INVITATION READY';
+      setTimeout(() => {
+        preloader.classList.add('fade-out');
+      }, 350);
+    }
+    if (progressFill) progressFill.style.width = `${progress}%`;
+  }, 100);
+
   window.addEventListener('load', () => {
+    progress = 100;
+    if (progressFill) progressFill.style.width = '100%';
+    if (statusText) statusText.textContent = 'INVITATION READY';
     setTimeout(() => {
       preloader.classList.add('fade-out');
-    }, 800);
+    }, 350);
   });
-
-  // Fallback timeout in case window load fires slowly
-  setTimeout(() => {
-    if (!preloader.classList.contains('fade-out')) {
-      preloader.classList.add('fade-out');
-    }
-  }, 2500);
 }
 
 /* --------------------------------------------------------------------------
