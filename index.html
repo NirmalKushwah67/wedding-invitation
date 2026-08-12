@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaydeep & Rishika</title>
+  <meta name="description"
+    content="You are cordially invited to celebrate the wedding of Eleanor & Alexander in Indore, India. Explore our invitation, event details, love story, gallery, and RSVP.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="page-background-animation" aria-hidden="true"></div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-outline"></div>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress-bar"></div>
+
+  <!-- Entry Gate Overlay -->
+  <div id="entry-gate" class="entry-gate">
+    <div class="entry-door">
+      <div class="door-panel door-left">
+        <div class="door-handle"></div>
+      </div>
+      <div class="door-panel door-right">
+        <div class="door-handle"></div>
+      </div>
+      <div class="door-message">
+        <p class="door-welcome">Welcome to Our Wedding</p>
+        <p class="door-subtext">Step inside to celebrate the love of Jaydeep &amp; Rishika.</p>
+        <button id="entry-gate-button" class="entry-gate-button" aria-label="Open site">Enter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ambient Particle Canvas -->
+  <canvas id="ambient-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
+
+  <!-- Preloader Screen -->
+  <!-- <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-monogram">J & R</div>
+      <div class="preloader-text">Celebrating Love</div>
+      <div class="preloader-subtext">Loading Invitation...</div>
+    </div>
+  </div> -->
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-seal">J&R</div>
+        <span>Jaydeep & Rishika</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#envelope-section" class="nav-link">Invitation</a></li>
+        <li><a href="#story" class="nav-link">Our Story</a></li>
+        <li><a href="#events" class="nav-link">Events</a></li>
+        <li><a href="#countdown" class="nav-link">Countdown</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#venue" class="nav-link">Venue</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="music-toggle" class="music-toggle" aria-label="Toggle Background Music" title="Toggle Music">
+          <i class="fas fa-music"></i>
+        </button>
+        <button class="nav-mobile-btn" aria-label="Toggle Navigation Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- Mobile Navigation Backdrop Overlay -->
+  <div class="nav-backdrop" id="nav-backdrop"></div>
+
+  <!-- 1. HERO SECTION -->
+  <section id="hero" class="hero-section" data-bg="hero">
+    <!-- SVG Floating Leaf Background Accents -->
+    <svg class="floating-leaf-svg leaf-1" viewBox="0 0 100 100" fill="#7B8362">
+      <path d="M50 0 C65 20, 90 35, 90 60 C90 80, 70 95, 50 95 C30 95, 10 80, 10 60 C10 35, 35 20, 50 0 Z" />
+    </svg>
+    <svg class="floating-leaf-svg leaf-2" viewBox="0 0 100 100" fill="#D6C29A">
+      <path d="M50 0 C65 20, 90 35, 90 60 C90 80, 70 95, 50 95 C30 95, 10 80, 10 60 C10 35, 35 20, 50 0 Z" />
+    </svg>
+
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text-content" data-animate="fade-right">
+          <div class="hero-monogram-badge">
+            <i class="fas fa-heart" style="color: var(--accent-gold-dark);"></i>
+            <span>TOGETHER WITH THEIR FAMILIES</span>
+          </div>
+          <span class="hero-greeting script-text">Welcome to the Wedding of</span>
+          <h1 class="hero-title">
+            Jaydeep <span>&</span> Rishika
+          </h1>
+          <div class="hero-date-badge">
+            <span> 10 Febuarary 2027</span>
+            <div class="divider-dot"></div>
+            <span>MANGRUL, KHARGONE</span>
+          </div>
+          <div class="hero-cta-group">
+            <a href="#envelope-section" class="btn-primary">
+              <i class="fas fa-envelope-open-text"></i> Open Invitation
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper" data-animate="fade-left" data-delay="200">
+          <div class="hero-image-frame">
+            <img src="assets/images/hero_couple.png" alt="Eleanor and Alexander Wedding Couple">
+            <div class="hero-photo-tag">Forever Starts Here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ANIMATED INVITATION ENVELOPE SECTION -->
+  <section id="envelope-section" class="envelope-section" data-bg="invitation">
+    <div class="container">
+      <div class="section-subtitle">An Invitation to</div>
+      <h2 class="section-title">Our Celebration</h2>
+
+      <div class="envelope-container" data-animate="scale-in">
+        <div class="envelope-wrapper" id="envelope">
+          <!-- Envelope Pocket Flaps -->
+          <div class="envelope-pocket"></div>
+          <div class="envelope-pocket-sides"></div>
+          <div class="envelope-pocket-right"></div>
+          <div class="envelope-flap"></div>
+          <div class="wax-seal">J & R</div>
+
+          <!-- Sliding Invitation Card Inside -->
+          <div class="invitation-card">
+            <span class="inv-header">Save the Date</span>
+            <div class="inv-names">Jaydeep &amp; Rishika</div>
+            <div class="inv-divider"></div>
+            <div class="inv-details">WHEN</div>
+            <div class="inv-time">10 FEBRUARY 2027 AT 05:00 AM</div>
+            <div class="inv-details" style="margin-top: 6px;">WHERE</div>
+            <div class="inv-location">MANGRUL KHARGONE</div>
+          </div>
+
+          <!-- Fan-out Polaroid Detail Photo -->
+          <div class="inv-photo-strip">
+            <img src="assets/images/envelope_couple.png" alt="Couple Preview Photo">
+            <span
+              style="font-family: var(--font-script); font-size: 1.1rem; display: block; text-align: center; color: var(--primary-olive-dark);">Love
+              Always</span>
+          </div>
+        </div>
+
+        <div class="envelope-hint" id="envelope-hint">
+          <i class="fas fa-hand-pointer"></i> Click Envelope to Open Invitation
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LOVE STORY TIMELINE -->
+  <section id="story" class="story-section" data-bg="story">
+    <div class="container">
+      <div class="section-subtitle">How It All Began</div>
+      <h2 class="section-title">Our Love Story</h2>
+
+      <div class="timeline">
+        <!-- Item 1 -->
+        <div class="timeline-item" data-animate="fade-right">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="story-date">Summer 2020</div>
+            <h3 class="story-title">How We Met</h3>
+            <p class="story-desc">
+              A chance encounter at a sunlit coastal bookstore in Florence. One shared smile over classical poetry
+              sparked a conversation that hasn't ended since.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="timeline-item" data-animate="fade-left">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="story-date">Autumn 2021</div>
+            <h3 class="story-title">First Date & Coffee</h3>
+            <p class="story-desc">
+              Hours turned into moments at a hidden garden café. We realized we shared the exact same dreams, passion
+              for travel, and love for silent evening walks.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="timeline-item" data-animate="fade-right">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="story-date">Spring 2024</div>
+            <h3 class="story-title">The Proposal in Venice</h3>
+            <p class="story-desc">
+              Under the golden glow of a Venetian sunset, aboard a private wooden gondola, Alexander got down on one
+              knee. With tears of joy, Eleanor said "Yes!"
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="timeline-item" data-animate="fade-left">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="story-date">October 2026</div>
+            <h3 class="story-title">The Beginning of Forever</h3>
+            <p class="story-desc">
+              Surrounded by our loved ones in the heart of Indore, we take the vow to walk hand in hand through all of
+              life's beautiful adventures.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. WEDDING EVENTS SECTION -->
+  <section id="events" class="events-section" data-bg="events">
+    <div class="container">
+      <div class="section-subtitle">Join The Celebrations</div>
+      <h2 class="section-title">Wedding Events</h2>
+
+      <div class="events-grid"></div>
+      <!-- Mehendi -->
+      <div class="event-card" data-animate="fade-up" data-delay="100">
+        <div class="event-icon"><i class="fas fa-hands-sparkles"></i></div>
+        <h3 class="event-name">Mehendi Ceremony</h3>
+        <div class="event-date-time">OCT 22, 2026 • 4:00 PM</div>
+        <div class="event-venue"><i class="fas fa-location-dot"></i> Olive Garden Terrace, Villa d'Este</div>
+        <div class="event-dress-code">Dress Code: Floral & Botanical Chic</div>
+        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
+      </div>
+
+      <!-- Haldi -->
+      <div class="event-card" data-animate="fade-up" data-delay="200">
+        <div class="event-icon"><i class="fas fa-sun"></i></div>
+        <h3 class="event-name">Haldi Celebration</h3>
+        <div class="event-date-time">OCT 23, 2026 • 10:00 AM</div>
+        <div class="event-venue"><i class="fas fa-location-dot"></i> Sunken Courtyard, Villa d'Este</div>
+        <div class="event-dress-code">Dress Code: Shades of Gold & Sunshine Yellow</div>
+        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
+      </div>
+
+      <!-- Sangeet -->
+      <div class="event-card" data-animate="fade-up" data-delay="300">
+        <div class="event-icon"><i class="fas fa-music"></i></div>
+        <h3 class="event-name">Sangeet Night</h3>
+        <div class="event-date-time">OCT 23, 2026 • 7:00 PM</div>
+        <div class="event-venue"><i class="fas fa-location-dot"></i> Grand Imperial Ballroom</div>
+        <div class="event-dress-code">Dress Code: Royal Glamour & Shimmering Attire</div>
+        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
+      </div>
+
+      <!-- Wedding Ceremony -->
+      <div class="event-card" data-animate="fade-up" data-delay="400">
+        <div class="event-icon"><i class="fas fa-ring"></i></div>
+        <h3 class="event-name">Holy Matrimony</h3>
+        <div class="event-date-time">OCT 24, 2026 • 10:00 AM</div>
+        <div class="event-venue"><i class="fas fa-location-dot"></i> Lakeside Amphitheater</div>
+        <div class="event-dress-code">Dress Code: Formal Luxury / Pastel Elegance</div>
+        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
+      </div>
+
+      <!-- Reception -->
+      <div class="event-card" data-animate="fade-up" data-delay="500">
+        <div class="event-icon"><i class="fas fa-glass-cheers"></i></div>
+        <h3 class="event-name">Grand Reception</h3>
+        <div class="event-date-time">OCT 24, 2026 • 7:00 PM</div>
+        <div class="event-venue"><i class="fas fa-location-dot"></i> Belvedere Palace Gardens</div>
+        <div class="event-dress-code">Dress Code: Black Tie Optional</div>
+        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- 5. COUNTDOWN TIMER SECTION -->
+  <section id="countdown" class="countdown-section" data-bg="countdown">
+    <div class="container">
+      <div class="section-subtitle">Forever Starts Soon</div>
+      <h2 class="section-title">Counting Down The Days</h2>
+
+      <div class="countdown-container" data-animate="scale-in">
+        <div class="countdown-circle-frame">
+          <span class="countdown-number" id="count-days">00</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-circle-frame">
+          <span class="countdown-number" id="count-hours">00</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-circle-frame">
+          <span class="countdown-number" id="count-mins">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-circle-frame">
+          <span class="countdown-number" id="count-secs">00</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PHOTO GALLERY SECTION -->
+  <section id="gallery" class="gallery-section" data-bg="gallery">
+    <div class="container">
+      <div class="section-subtitle">Memories & Moments</div>
+      <h2 class="section-title">Photo Gallery</h2>
+
+      <div class="gallery-filters" data-animate="fade-up">
+        <button class="filter-btn active" data-filter="all">All Photos</button>
+        <button class="filter-btn" data-filter="couple">Couple</button>
+        <button class="filter-btn" data-filter="ceremony">Ceremony</button>
+        <button class="filter-btn" data-filter="details">Details</button>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Item 1 -->
+        <div class="gallery-item tall" data-category="couple" data-caption="Eleanor & Alexander Editorial Portrait"
+          data-animate="fade-up">
+          <img src="assets/images/hero_couple.png" alt="Editorial Couple Portrait">
+          <div class="gallery-overlay">
+            <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
+            <div class="gallery-caption">Together Forever</div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="gallery-item" data-category="details" data-caption="Gold & Diamond Wedding Rings"
+          data-animate="fade-up" data-delay="100">
+          <img src="assets/images/wedding_rings.png" alt="Wedding Rings">
+          <div class="gallery-overlay">
+            <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
+            <div class="gallery-caption">Eternal Rings</div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="gallery-item" data-category="ceremony" data-caption="Indore Venue at Sunset" data-animate="fade-up"
+          data-delay="200">
+          <img src="assets/images/wedding_venue.png" alt="Wedding Estate Venue">
+          <div class="gallery-overlay">
+            <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
+            <div class="gallery-caption">Indore Venue</div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="gallery-item" data-category="couple" data-caption="Polaroid Tender Moments" data-animate="fade-up"
+          data-delay="300">
+          <img src="assets/images/envelope_couple.png" alt="Couple Embrace">
+          <div class="gallery-overlay">
+            <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
+            <div class="gallery-caption">Tender Embrace</div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="gallery-item" data-category="details" data-caption="Luxury Floral Table Setup"
+          data-animate="fade-up" data-delay="400">
+          <img src="assets/images/wedding_venue.png" alt="Floral Table Detail">
+          <div class="gallery-overlay">
+            <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
+            <div class="gallery-caption">Floral Table Décor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <button class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Lightbox View">
+      <div id="lightbox-caption"
+        style="color: #fff; font-family: var(--font-serif); font-size: 1.3rem; margin-top: 15px;"></div>
+    </div>
+    <div class="lightbox-nav">
+      <button class="lightbox-btn lightbox-prev" aria-label="Previous Image"><i
+          class="fas fa-chevron-left"></i></button>
+      <button class="lightbox-btn lightbox-next" aria-label="Next Image"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+
+  <!-- 7. VENUE & LOCATION SECTION -->
+  <section id="venue" class="venue-section" data-bg="venue">
+    <div class="container">
+      <div class="section-subtitle">Location & Directions</div>
+      <h2 class="section-title">The Destination</h2>
+
+      <div class="venue-grid">
+        <div class="venue-card" data-animate="fade-right">
+          <h3 class="venue-title"> Khargone</h3>
+          <div class="venue-address">
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+          </p>
+          <div
+            style="background: rgba(123, 131, 98, 0.08); padding: 1.2rem; border-radius: var(--radius-sm); margin-bottom: 1.8rem; border-left: 3px solid var(--primary-olive);">
+            <div
+              style="font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-olive-dark);">
+              Guest Accommodations</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">Special room rate codes available upon booking.
+              Complimentary private shuttle service provided from Milan Malpensa Airport.</div>
+          </div>
+          <a href="https://maps.google.com/?q=Khargone+India" target="_blank" rel="noopener noreferrer"
+            class="btn-primary">
+            <i class="fas fa-directions"></i> Get Directions
+          </a>
+        </div>
+
+        <div class="venue-map-container" data-animate="fade-left">
+          <div class="venue-map-wrapper">
+            <iframe src="https://www.google.com/maps?q=Khargone+India&output=embed" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" title="Khargone">
+            </iframe>
+            <div class="venue-map-overlay">
+              <div class="venue-map-info">
+                <span class="venue-map-label">Venue</span>
+                <span class="venue-map-name">Khargone Celebration Venue</span>
+                <span class="venue-map-location">Khargone, India</span>
+              </div>
+              <a href="https://maps.google.com/?q=Khargone+India" target="_blank" rel="noopener noreferrer"
+                class="venue-map-button">
+                <i class="fas fa-directions"></i> Get Directions
+              </a>
+              <a href="https://maps.google.com/?q=Khargone+India" target="_blank" rel="noopener noreferrer"
+                class="venue-map-link-mobile" aria-label="Get directions to Khargone"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 9. FOOTER SECTION -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-monogram">J & R</div>
+      <div class="footer-quote">"Two souls with but a single thought, two hearts that beat as one."</div>
+
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#" class="social-link" aria-label="Spotify Playlist"><i class="fab fa-spotify"></i></a>
+      </div>
+
+      <div class="footer-copyright">
+        &copy; CRAFTED BY NIRMAL KUSHWAH
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Main javaScript File -->
+  <script src="js/script.js"></script>
+</body>
+
+</html>
