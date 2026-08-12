@@ -21,7 +21,7 @@ let isOpeningInvitation = false;
 function initializeEntryGate() {
   const gate = document.getElementById('entry-gate');
   const gateButton = document.getElementById('entry-gate-button');
-  const actionButton = document.getElementById('entry-action-button');
+  const openButton = document.getElementById('entry-open-btn');
   if (!gate) return;
 
   // Scroll lock active while gate is present
@@ -29,7 +29,7 @@ function initializeEntryGate() {
   document.body.classList.add('gate-active');
 
   // Trigger on button click or tap
-  [gateButton, actionButton].forEach(btn => {
+  [gateButton, openButton].forEach(btn => {
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
