@@ -32,19 +32,98 @@
   <!-- Scroll Progress Indicator -->
   <div class="scroll-progress-bar"></div>
 
-  <!-- Entry Gate Overlay -->
-  <div id="entry-gate" class="entry-gate">
-    <div class="entry-door">
-      <div class="door-panel door-left">
-        <div class="door-handle"></div>
+  <!-- FULLSCREEN LUXURY WEDDING ENVELOPE ENTRY GATE OVERLAY -->
+  <div id="entry-gate" class="entry-gate-overlay" role="dialog" aria-modal="true" aria-label="Open wedding invitation">
+    <!-- Paper Texture & Floating Sparkles Canvas -->
+    <div class="entry-paper-texture" aria-hidden="true"></div>
+    <canvas id="entry-sparkles-canvas" class="entry-sparkles-canvas" aria-hidden="true"></canvas>
+
+    <!-- 3D Physical Envelope Flap Stage -->
+    <div class="envelope-stage" aria-hidden="true">
+      <!-- Top Envelope Flap -->
+      <div class="envelope-flap-top">
+        <svg class="flap-top-svg" viewBox="0 0 1440 600" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="topFlapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#fdfbf7" />
+              <stop offset="70%" stop-color="#f5ecd8" />
+              <stop offset="100%" stop-color="#e8d9bd" />
+            </linearGradient>
+            <filter id="flapShadow" x="-10%" y="-10%" width="120%" height="130%">
+              <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#52361b" flood-opacity="0.22" />
+            </filter>
+          </defs>
+          <path d="M0 0 H1440 V180 L720 540 L0 180 Z" fill="url(#topFlapGrad)" filter="url(#flapShadow)" />
+          <path d="M0 180 L720 540 L1440 180" fill="none" stroke="#d6c29a" stroke-width="3" stroke-dasharray="8 6" />
+        </svg>
       </div>
-      <div class="door-panel door-right">
-        <div class="door-handle"></div>
+
+      <!-- Left Envelope Panel -->
+      <div class="envelope-panel-left">
+        <svg class="panel-left-svg" viewBox="0 0 720 1080" preserveAspectRatio="none">
+          <path d="M0 0 L720 540 L0 1080 Z" fill="#f7f1e6" opacity="0.95" />
+          <path d="M0 0 L720 540 L0 1080" fill="none" stroke="#b8863f" stroke-width="2" opacity="0.4" />
+        </svg>
       </div>
-      <div class="door-message">
-        <p class="door-welcome">Welcome to Our Wedding</p>
-        <p class="door-subtext">Step inside to celebrate the love of Jaydeep &amp; Rishika.</p>
-        <button id="entry-gate-button" class="entry-gate-button" aria-label="Open site">Enter</button>
+
+      <!-- Right Envelope Panel -->
+      <div class="envelope-panel-right">
+        <svg class="panel-right-svg" viewBox="0 0 720 1080" preserveAspectRatio="none">
+          <path d="M720 0 L0 540 L720 1080 Z" fill="#f2e9dc" opacity="0.95" />
+          <path d="M720 0 L0 540 L720 1080" fill="none" stroke="#b8863f" stroke-width="2" opacity="0.4" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Envelope Content & Interactive Pearl Seal Button -->
+    <div class="envelope-content">
+      <div class="entry-header-group">
+        <span class="entry-sub-caps">WITH LOVE</span>
+        <span class="entry-families-caps">TOGETHER WITH THEIR FAMILIES</span>
+        <h1 class="entry-couple-title">Jaydeep &amp; Rishika</h1>
+      </div>
+
+      <!-- Interactive Pearl Seal Brooch Button -->
+      <div class="entry-seal-container">
+        <button id="entry-gate-button" class="entry-pearl-seal" aria-label="Touch to open wedding invitation" tabindex="0">
+          <svg class="seal-lace-rosette" viewBox="0 0 200 200">
+            <defs>
+              <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f5ecd8" />
+                <stop offset="60%" stop-color="#b8863f" />
+                <stop offset="100%" stop-color="#7e5620" />
+              </radialGradient>
+            </defs>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="url(#goldGlow)" stroke-width="2" stroke-dasharray="4 4" />
+            <g fill="none" stroke="#b8863f" stroke-width="2" opacity="0.85">
+              <circle cx="100" cy="20" r="16" />
+              <circle cx="140" cy="30" r="16" />
+              <circle cx="170" cy="60" r="16" />
+              <circle cx="180" cy="100" r="16" />
+              <circle cx="170" cy="140" r="16" />
+              <circle cx="140" cy="170" r="16" />
+              <circle cx="100" cy="180" r="16" />
+              <circle cx="60" cy="170" r="16" />
+              <circle cx="30" cy="140" r="16" />
+              <circle cx="20" cy="100" r="16" />
+              <circle cx="30" cy="60" r="16" />
+              <circle cx="60" cy="30" r="16" />
+            </g>
+          </svg>
+
+          <!-- Core Pearl Center -->
+          <div class="seal-pearl-disc">
+            <div class="seal-pearl-core">
+              <div class="pearl-highlight"></div>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Touch Prompt Indicator -->
+      <div class="entry-touch-prompt">
+        <span class="touch-text">TOUCH TO OPEN</span>
+        <i class="fas fa-hand-pointer touch-hand-icon" aria-hidden="true"></i>
       </div>
     </div>
   </div>
