@@ -657,25 +657,40 @@ body.gate-active {
   height: 100%;
 }
 
-/* Envelope Content Layout */
+/* Envelope Content Layout (Dead-Centered on Mobile & Desktop) */
 .envelope-content {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  max-width: 520px;
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: clamp(80vh, 88vh, 92vh);
-  padding: 2rem 1.5rem;
+  height: clamp(80vh, 85vh, 90vh);
+  padding: 1.5rem 1rem;
   text-align: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+  pointer-events: none;
   transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.envelope-content > * {
+  pointer-events: auto;
 }
 
 .entry-header-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: clamp(1rem, 4vh, 2.5rem);
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-top: clamp(0.5rem, 3vh, 2rem);
 }
 
 .entry-sub-caps {
@@ -710,7 +725,11 @@ body.gate-active {
 
 .entry-seal-container {
   position: relative;
-  margin: 1rem 0;
+  margin: 0.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .entry-pearl-seal {
@@ -850,7 +869,7 @@ body.gate-active {
    ========================================================================== */
 .entry-gate-overlay.opening-gate .envelope-content {
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translate(-50%, calc(-50% - 20px));
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
