@@ -21,6 +21,7 @@ let isOpeningInvitation = false;
 function initializeEntryGate() {
   const gate = document.getElementById('entry-gate');
   const gateButton = document.getElementById('entry-gate-button');
+  const actionButton = document.getElementById('entry-action-button');
   if (!gate) return;
 
   // Scroll lock active while gate is present
@@ -28,12 +29,14 @@ function initializeEntryGate() {
   document.body.classList.add('gate-active');
 
   // Trigger on button click or tap
-  if (gateButton) {
-    gateButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openInvitation();
-    });
-  }
+  [gateButton, actionButton].forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openInvitation();
+      });
+    }
+  });
 
   // Allow tapping anywhere on the envelope overlay to open
   gate.addEventListener('click', () => {
@@ -176,13 +179,13 @@ function initEntrySparkles() {
 function initPreloader() {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
-  
+
   window.addEventListener('load', () => {
     setTimeout(() => {
       preloader.classList.add('fade-out');
     }, 800);
   });
-  
+
   // Fallback timeout in case window load fires slowly
   setTimeout(() => {
     if (!preloader.classList.contains('fade-out')) {
@@ -295,7 +298,7 @@ function initNavigation() {
     // Active link detection based on section scroll offset
     const navHeight = navbar.offsetHeight || 80;
     let currentSectionId = '';
-    
+
     sections.forEach(section => {
       const sectionTop = section.offsetTop - navHeight - 40;
       const sectionHeight = section.offsetHeight;
