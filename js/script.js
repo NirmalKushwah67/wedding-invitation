@@ -62,7 +62,10 @@ function openInvitation() {
   const gateButton = document.getElementById('entry-gate-button');
   if (!gate) return;
 
-  // 1. Play soft paper-opening chime audio if Web Audio is available
+  // 1. Start background music automatically on entry gate open
+  playBackgroundMusic();
+
+  // 2. Play soft paper-opening chime audio if Web Audio is available
   playOpeningSound();
 
   // 2. Sparkle particle burst effect around the seal button
@@ -749,42 +752,49 @@ function initAmbientParticles() {
 /* --------------------------------------------------------------------------
    11. AUDIO PLAYER
    -------------------------------------------------------------------------- */
+function playBackgroundMusic() {
+  const audio = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('music-toggle');
+  if (!audio) return;
+
+  const playPromise = audio.play();
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      if (musicBtn) {
+        musicBtn.classList.add('playing');
+        const icon = musicBtn.querySelector('i');
+        if (icon) icon.className = 'fas fa-music';
+      }
+    }).catch(err => {
+      console.warn("Autoplay notice: Place your audio file at assets/music.mp3 or check audio path.", err);
+    });
+  }
+}
+
 function initAudioPlayer() {
   const musicBtn = document.getElementById('music-toggle');
+  const audio = document.getElementById('bg-music');
   if (!musicBtn) return;
 
-  let isPlaying = false;
-  // Synthesize soft romantic ambient chords using Web Audio API on click
-  let audioCtx = null;
-  let osc = null;
-  let gainNode = null;
+  musicBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-  musicBtn.addEventListener('click', () => {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-
-    if (isPlaying) {
-      if (gainNode) gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
-      musicBtn.classList.remove('playing');
-      isPlaying = false;
-    } else {
-      audioCtx.resume();
-      osc = audioCtx.createOscillator();
-      gainNode = audioCtx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(440, audioCtx.currentTime); // Soft A4 note
-
-      gainNode.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.05, audioCtx.currentTime + 1);
-
-      osc.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      osc.start();
-
-      musicBtn.classList.add('playing');
-      isPlaying = true;
+    if (audio) {
+      if (audio.paused) {
+        audio.play().then(() => {
+          musicBtn.classList.add('playing');
+          const icon = musicBtn.querySelector('i');
+          if (icon) icon.className = 'fas fa-music';
+        }).catch(err => {
+          console.warn("Could not play audio file:", err);
+          alert("Please add your song file (music.mp3) to the 'assets' folder or check the audio link in index.html.");
+        });
+      } else {
+        audio.pause();
+        musicBtn.classList.remove('playing');
+        const icon = musicBtn.querySelector('i');
+        if (icon) icon.className = 'fas fa-volume-mute';
+      }
     }
   });
 }
