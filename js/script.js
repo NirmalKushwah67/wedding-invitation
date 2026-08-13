@@ -754,47 +754,25 @@ function initAmbientParticles() {
    -------------------------------------------------------------------------- */
 function playBackgroundMusic() {
   const audio = document.getElementById('bg-music');
-  const musicBtn = document.getElementById('music-toggle');
   if (!audio) return;
 
   const playPromise = audio.play();
   if (playPromise !== undefined) {
-    playPromise.then(() => {
-      if (musicBtn) {
-        musicBtn.classList.add('playing');
-        const icon = musicBtn.querySelector('i');
-        if (icon) icon.className = 'fas fa-music';
-      }
-    }).catch(err => {
-      console.warn("Autoplay notice: Place your audio file at assets/music.mp3 or check audio path.", err);
+    playPromise.catch(err => {
+      console.warn("Autoplay notice:", err);
     });
   }
 }
 
 function initAudioPlayer() {
-  const musicBtn = document.getElementById('music-toggle');
-  const audio = document.getElementById('bg-music');
-  if (!musicBtn) return;
-
-  musicBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-
-    if (audio) {
-      if (audio.paused) {
-        audio.play().then(() => {
-          musicBtn.classList.add('playing');
-          const icon = musicBtn.querySelector('i');
-          if (icon) icon.className = 'fas fa-music';
-        }).catch(err => {
-          console.warn("Could not play audio file:", err);
-          alert("Please add your song file (music.mp3) to the 'assets' folder or check the audio link in index.html.");
-        });
-      } else {
-        audio.pause();
-        musicBtn.classList.remove('playing');
-        const icon = musicBtn.querySelector('i');
-        if (icon) icon.className = 'fas fa-volume-mute';
-      }
+  // Fallback: Start background song on first user interaction if gate is already bypassed
+  const handleFirstInteraction = () => {
+    const audio = document.getElementById('bg-music');
+    if (audio && audio.paused) {
+      audio.play().catch(() => {});
     }
-  });
+  };
+
+  document.addEventListener('click', handleFirstInteraction, { once: true });
+  document.addEventListener('touchstart', handleFirstInteraction, { once: true });
 }
