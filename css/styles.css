@@ -896,7 +896,7 @@ body.gate-active {
 }
 
 /* --------------------------------------------------------------------------
-   4. NAVIGATION BAR & AUDIO TOGGLE
+   4. NAVIGATION BAR
    -------------------------------------------------------------------------- */
 .navbar {
   position: fixed;
@@ -1009,35 +1009,7 @@ body.gate-active {
   z-index: 10002;
 }
 
-/* Audio Toggle */
-.music-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--accent-gold);
-  background: rgba(255, 253, 248, 0.9);
-  color: var(--primary-olive);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform var(--transition-fast), background var(--transition-fast);
-}
 
-.music-toggle:hover {
-  transform: scale(1.08);
-  background: var(--accent-gold-light);
-}
-
-.music-toggle.playing i {
-  animation: spinMusic 4s linear infinite;
-}
-
-@keyframes spinMusic {
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 /* Mobile Toggle */
 .nav-mobile-btn {

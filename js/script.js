@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initGalleryLightbox();
   initAmbientParticles();
-  initAudioPlayer();
   initializeEntryGate();
 });
 
@@ -62,21 +61,15 @@ function openInvitation() {
   const gateButton = document.getElementById('entry-gate-button');
   if (!gate) return;
 
-  // 1. Start background music automatically on entry gate open
-  playBackgroundMusic();
-
-  // 2. Play soft paper-opening chime audio if Web Audio is available
-  playOpeningSound();
-
-  // 2. Sparkle particle burst effect around the seal button
+  // 1. Sparkle particle burst effect around the seal button
   if (gateButton && typeof createSparkleBurst === 'function') {
     createSparkleBurst(gateButton);
   }
 
-  // 3. Add 3D flap opening animation class
+  // 2. Add 3D flap opening animation class
   gate.classList.add('opening-gate');
 
-  // 4. Smoothly finish transition after 1.8s - 2.2s
+  // 3. Smoothly finish transition after 1.8s - 2.2s
   setTimeout(() => {
     gate.classList.add('opened-gate');
     closeEntryGate();
@@ -94,35 +87,6 @@ function closeEntryGate() {
   // Disable entry gate overlay completely
   gate.classList.add('hidden-gate');
   gate.style.display = 'none';
-}
-
-function playOpeningSound() {
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
-    const ctx = new AudioContext();
-    ctx.resume();
-
-    const now = ctx.currentTime;
-    const freqs = [523.25, 659.25, 783.99, 1046.50]; // Soft C5 E5 G5 C6 chord
-    freqs.forEach((freq, idx) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.04, now + idx * 0.08 + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 1.2);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now + idx * 0.08);
-      osc.stop(now + idx * 0.08 + 1.3);
-    });
-  } catch (err) {
-    // Audio fallback ignored
-  }
 }
 
 function initEntrySparkles() {
@@ -749,30 +713,3 @@ function initAmbientParticles() {
   draw();
 }
 
-/* --------------------------------------------------------------------------
-   11. AUDIO PLAYER
-   -------------------------------------------------------------------------- */
-function playBackgroundMusic() {
-  const audio = document.getElementById('bg-music');
-  if (!audio) return;
-
-  const playPromise = audio.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(err => {
-      console.warn("Autoplay notice:", err);
-    });
-  }
-}
-
-function initAudioPlayer() {
-  // Fallback: Start background song on first user interaction if gate is already bypassed
-  const handleFirstInteraction = () => {
-    const audio = document.getElementById('bg-music');
-    if (audio && audio.paused) {
-      audio.play().catch(() => {});
-    }
-  };
-
-  document.addEventListener('click', handleFirstInteraction, { once: true });
-  document.addEventListener('touchstart', handleFirstInteraction, { once: true });
-}
