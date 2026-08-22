@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initGalleryLightbox();
   initAmbientParticles();
+  initHeroFloatingCanvas();
+  initEventsPetalShower();
+  initValentineLoveStoryCanvas();
   initializeEntryGate();
 });
 
@@ -66,13 +69,23 @@ function openInvitation() {
     createSparkleBurst(gateButton);
   }
 
-  // 2. Add 3D flap opening animation class
+  // 2. Trigger Royal Celebratory Wedding Confetti Shower
+  setTimeout(() => {
+    if (typeof launchConfetti === 'function') {
+      launchConfetti();
+    }
+  }, 400);
+
+  // 3. Add 3D flap opening animation class
   gate.classList.add('opening-gate');
 
-  // 3. Smoothly finish transition after 1.8s - 2.2s
+  // 4. Smoothly finish transition after 1.8s - 2.2s
   setTimeout(() => {
     gate.classList.add('opened-gate');
     closeEntryGate();
+    if (typeof launchConfetti === 'function') {
+      launchConfetti();
+    }
   }, 2000);
 }
 
@@ -391,7 +404,7 @@ function initNavigation() {
 }
 
 /* --------------------------------------------------------------------------
-   5. INTERACTIVE ENVELOPE
+   5. INTERACTIVE ENVELOPE (ROYAL WEDDING ANIMATION)
    -------------------------------------------------------------------------- */
 function initInteractiveEnvelope() {
   const envelope = document.getElementById('envelope');
@@ -400,46 +413,73 @@ function initInteractiveEnvelope() {
   if (!envelope) return;
 
   envelope.addEventListener('click', () => {
+    const isNowOpen = !envelope.classList.contains('open');
     envelope.classList.toggle('open');
 
-    if (envelope.classList.contains('open')) {
-      if (envelopeHint) envelopeHint.textContent = 'Click to Close Envelope';
+    if (isNowOpen) {
+      if (envelopeHint) {
+        envelopeHint.innerHTML = '<i class="fas fa-heart" style="color: #e11d48;"></i> Click Envelope to Close';
+      }
       createSparkleBurst(envelope);
+      if (typeof launchConfetti === 'function') {
+        setTimeout(() => launchConfetti(), 250);
+      }
     } else {
-      if (envelopeHint) envelopeHint.textContent = 'Click Envelope to Open Invitation';
+      if (envelopeHint) {
+        envelopeHint.innerHTML = '<i class="fas fa-hand-pointer"></i> Click Envelope to Open Invitation';
+      }
     }
   });
 }
 
 function createSparkleBurst(element) {
   const rect = element.getBoundingClientRect();
-  for (let i = 0; i < 20; i++) {
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle-particle';
-    sparkle.style.position = 'fixed';
-    sparkle.style.left = `${rect.left + rect.width / 2}px`;
-    sparkle.style.top = `${rect.top + rect.height / 2}px`;
-    sparkle.style.width = '6px';
-    sparkle.style.height = '6px';
-    sparkle.style.backgroundColor = '#D6C29A';
-    sparkle.style.borderRadius = '50%';
-    sparkle.style.pointerEvents = 'none';
-    sparkle.style.zIndex = '9999';
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
 
-    const angle = Math.random() * Math.PI * 2;
-    const distance = 40 + Math.random() * 80;
+  // Auspicious Wedding Colors: Red Rose, Marigold, Zari Gold, and Champagne
+  const weddingColors = [
+    '#e11d48', // Gulab Red
+    '#f43f5e', // Rose Petal
+    '#f59e0b', // Saffron Marigold
+    '#fbbf24', // Genda Gold
+    '#d4af37', // 24K Gold
+    '#ffffff'  // Sparkling Diamond White
+  ];
+
+  for (let i = 0; i < 35; i++) {
+    const p = document.createElement('div');
+    p.className = 'envelope-burst-particle';
+    p.style.position = 'fixed';
+    p.style.left = `${centerX}px`;
+    p.style.top = `${centerY}px`;
+
+    const isPetal = i % 2 === 0;
+    const size = isPetal ? (Math.random() * 9 + 10) : (Math.random() * 6 + 5);
+    p.style.width = `${size}px`;
+    p.style.height = isPetal ? `${size * 1.35}px` : `${size}px`;
+    p.style.backgroundColor = weddingColors[Math.floor(Math.random() * weddingColors.length)];
+    p.style.borderRadius = isPetal ? '50% 50% 50% 0' : '50%';
+    p.style.pointerEvents = 'none';
+    p.style.zIndex = '99999';
+    p.style.boxShadow = `0 0 12px ${p.style.backgroundColor}`;
+
+    const angle = (i / 35) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
+    const distance = 90 + Math.random() * 150;
     const destX = Math.cos(angle) * distance;
-    const destY = Math.sin(angle) * distance;
+    const destY = Math.sin(angle) * distance - 25;
+    const rot = Math.random() * 720 - 360;
 
-    document.body.appendChild(sparkle);
+    document.body.appendChild(p);
 
-    sparkle.animate([
-      { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-      { transform: `translate(${destX}px, ${destY}px) scale(0)`, opacity: 0 }
+    p.animate([
+      { transform: 'translate(0, 0) scale(0.3) rotate(0deg)', opacity: 1 },
+      { transform: `translate(${destX * 0.55}px, ${destY * 0.55}px) scale(1.25) rotate(${rot * 0.5}deg)`, opacity: 1, offset: 0.4 },
+      { transform: `translate(${destX}px, ${destY + 45}px) scale(0.2) rotate(${rot}deg)`, opacity: 0 }
     ], {
-      duration: 1000,
-      easing: 'cubic-bezier(0, .9, .57, 1)'
-    }).onfinish = () => sparkle.remove();
+      duration: 1200 + Math.random() * 400,
+      easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+    }).onfinish = () => p.remove();
   }
 }
 
@@ -484,21 +524,21 @@ function initCountdownTimer() {
 }
 
 /* --------------------------------------------------------------------------
-   7. SCROLL REVEAL ANIMATIONS
+   7. SCROLL REVEAL ANIMATIONS & GALLERY SCROLL OBSERVER
    -------------------------------------------------------------------------- */
 function initScrollAnimations() {
   const animatedElements = document.querySelectorAll('[data-animate]');
 
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -80px 0px',
+    rootMargin: '0px 0px -60px 0px',
     threshold: 0.15
   };
 
   const observer = new IntersectionObserver((entries, observerInstance) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const delay = entry.target.getAttribute('data-delay') || 0;
+        const delay = parseInt(entry.target.getAttribute('data-delay') || 0, 10);
         setTimeout(() => {
           entry.target.classList.add('animated');
         }, delay);
@@ -508,13 +548,42 @@ function initScrollAnimations() {
   }, observerOptions);
 
   animatedElements.forEach(el => observer.observe(el));
+  initGalleryScrollReveal();
+}
+
+function initGalleryScrollReveal() {
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  if (!galleryItems.length) return;
+
+  const galleryObserver = new IntersectionObserver((entries, observerInstance) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const item = entry.target;
+        const delay = parseInt(item.getAttribute('data-delay') || 0, 10);
+        setTimeout(() => {
+          item.classList.add('in-view');
+        }, delay);
+        observerInstance.unobserve(item);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '0px 0px -40px 0px',
+    threshold: 0.12
+  });
+
+  galleryItems.forEach((item, index) => {
+    if (!item.hasAttribute('data-delay')) {
+      item.setAttribute('data-delay', (index % 3) * 140);
+    }
+    galleryObserver.observe(item);
+  });
 }
 
 /* --------------------------------------------------------------------------
    8. PHOTO GALLERY & LIGHTBOX
    -------------------------------------------------------------------------- */
 function initGalleryLightbox() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item');
   const lightboxModal = document.getElementById('lightbox-modal');
   const lightboxImg = document.getElementById('lightbox-img');
@@ -524,27 +593,6 @@ function initGalleryLightbox() {
   const nextBtn = document.querySelector('.lightbox-next');
 
   let currentGalleryIndex = 0;
-  const visibleImages = [];
-
-  // Filter gallery items
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-filter');
-
-      galleryItems.forEach(item => {
-        const category = item.getAttribute('data-category');
-        if (filter === 'all' || category === filter) {
-          item.style.display = 'block';
-          item.style.animation = 'scaleIn 0.4s ease forwards';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
 
   // Open Lightbox
   galleryItems.forEach((item, index) => {
@@ -705,6 +753,350 @@ function initAmbientParticles() {
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(214, 194, 154, ${p.alpha})`;
       ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
+/* --------------------------------------------------------------------------
+   11. INDIAN WEDDING FLOATING PETALS (ROSE & MARIGOLD) CANVAS
+   -------------------------------------------------------------------------- */
+function initEventsPetalShower() {
+  const canvas = document.getElementById('events-petals-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth);
+  let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : window.innerHeight);
+
+  function resizeCanvas() {
+    if (!canvas.parentElement) return;
+    width = canvas.width = canvas.parentElement.offsetWidth || window.innerWidth;
+    height = canvas.height = canvas.parentElement.offsetHeight || 900;
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  setTimeout(resizeCanvas, 400);
+
+  // Petal Palette: Auspicious Indian Red Rose & Marigold (Genda Phool)
+  const petalColors = [
+    { fill: 'rgba(225, 29, 72, 0.82)', shadow: 'rgba(190, 18, 60, 0.4)' },   // Gulab Red
+    { fill: 'rgba(244, 63, 94, 0.75)', shadow: 'rgba(159, 18, 57, 0.3)' },   // Soft Rose
+    { fill: 'rgba(245, 158, 11, 0.82)', shadow: 'rgba(217, 119, 6, 0.4)' },  // Marigold Saffron
+    { fill: 'rgba(251, 191, 36, 0.78)', shadow: 'rgba(180, 83, 9, 0.3)' },   // Genda Gold
+    { fill: 'rgba(212, 175, 55, 0.72)', shadow: 'rgba(180, 130, 40, 0.3)' }  // Zari Gold
+  ];
+
+  const petals = [];
+  const petalCount = 38;
+
+  for (let i = 0; i < petalCount; i++) {
+    petals.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 9 + 8,
+      speedY: Math.random() * 0.75 + 0.45,
+      speedX: Math.random() * 0.4 - 0.2,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.025,
+      oscillation: Math.random() * Math.PI * 2,
+      oscSpeed: Math.random() * 0.03 + 0.012,
+      color: petalColors[Math.floor(Math.random() * petalColors.length)],
+      isRose: Math.random() > 0.45
+    });
+  }
+
+  function drawPetals() {
+    ctx.clearRect(0, 0, width, height);
+
+    petals.forEach(p => {
+      p.y += p.speedY;
+      p.oscillation += p.oscSpeed;
+      p.x += Math.sin(p.oscillation) * 0.6 + p.speedX;
+      p.rotation += p.rotSpeed;
+
+      // Wrap around edges
+      if (p.y > height + 20) {
+        p.y = -20;
+        p.x = Math.random() * width;
+      }
+      if (p.x < -20) p.x = width + 20;
+      if (p.x > width + 20) p.x = -20;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+
+      // Draw graceful organic Indian wedding petal
+      ctx.beginPath();
+      if (p.isRose) {
+        // Curved Rose Petal
+        ctx.moveTo(0, -p.size);
+        ctx.bezierCurveTo(p.size * 0.8, -p.size * 0.6, p.size * 0.9, p.size * 0.6, 0, p.size);
+        ctx.bezierCurveTo(-p.size * 0.9, p.size * 0.6, -p.size * 0.8, -p.size * 0.6, 0, -p.size);
+      } else {
+        // Rounded Marigold Flake
+        ctx.ellipse(0, 0, p.size * 0.75, p.size * 0.5, 0, 0, Math.PI * 2);
+      }
+
+      ctx.fillStyle = p.color.fill;
+      ctx.shadowColor = p.color.shadow;
+      ctx.shadowBlur = 4;
+      ctx.fill();
+      ctx.restore();
+    });
+
+    requestAnimationFrame(drawPetals);
+  }
+
+  drawPetals();
+}
+
+/* --------------------------------------------------------------------------
+   12. FLOATING VALENTINE HEARTS & ROMANTIC SPARKLES CANVAS
+   -------------------------------------------------------------------------- */
+function initValentineLoveStoryCanvas() {
+  const canvas = document.getElementById('story-valentine-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth);
+  let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : window.innerHeight);
+
+  function resizeCanvas() {
+    if (!canvas.parentElement) return;
+    width = canvas.width = canvas.parentElement.offsetWidth || window.innerWidth;
+    height = canvas.height = canvas.parentElement.offsetHeight || 900;
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  setTimeout(resizeCanvas, 400);
+
+  const lovePalette = [
+    { fill: 'rgba(225, 29, 72, 0.75)', glow: 'rgba(225, 29, 72, 0.45)' },   // Crimson Ruby
+    { fill: 'rgba(244, 63, 94, 0.70)', glow: 'rgba(244, 63, 94, 0.38)' },   // Rose Pink
+    { fill: 'rgba(251, 113, 133, 0.68)', glow: 'rgba(251, 113, 133, 0.35)' }, // Sweet Blush
+    { fill: 'rgba(212, 175, 55, 0.72)', glow: 'rgba(212, 175, 55, 0.38)' },   // Champagne Gold
+    { fill: 'rgba(253, 164, 175, 0.72)', glow: 'rgba(253, 164, 175, 0.4)' }   // Pastel Valentine
+  ];
+
+  const floaters = [];
+  const totalFloaters = 36;
+
+  for (let i = 0; i < totalFloaters; i++) {
+    const type = Math.random() > 0.38 ? 'heart' : (Math.random() > 0.5 ? 'sparkle' : 'petal');
+    floaters.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: type === 'heart' ? (Math.random() * 10 + 10) : (Math.random() * 6 + 4),
+      speedY: Math.random() * 0.6 + 0.35,
+      speedX: (Math.random() - 0.5) * 0.35,
+      directionY: Math.random() > 0.25 ? -1 : 1, // Romantic ascending hearts
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.02,
+      oscillation: Math.random() * Math.PI * 2,
+      oscSpeed: Math.random() * 0.025 + 0.01,
+      color: lovePalette[Math.floor(Math.random() * lovePalette.length)],
+      type: type
+    });
+  }
+
+  function drawHeartShape(c, size) {
+    c.beginPath();
+    const topCurveHeight = size * 0.3;
+    c.moveTo(0, topCurveHeight);
+    c.bezierCurveTo(-size / 2, -size / 2, -size, topCurveHeight / 2, 0, size);
+    c.bezierCurveTo(size, topCurveHeight / 2, size / 2, -size / 2, 0, topCurveHeight);
+    c.closePath();
+  }
+
+  function drawSparkleShape(c, size) {
+    c.beginPath();
+    c.moveTo(0, -size);
+    c.quadraticCurveTo(0, 0, size, 0);
+    c.quadraticCurveTo(0, 0, 0, size);
+    c.quadraticCurveTo(0, 0, -size, 0);
+    c.quadraticCurveTo(0, 0, 0, -size);
+    c.closePath();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    floaters.forEach(f => {
+      f.y += f.speedY * f.directionY;
+      f.oscillation += f.oscSpeed;
+      f.x += Math.sin(f.oscillation) * 0.55 + f.speedX;
+      f.rotation += f.rotSpeed;
+
+      if (f.y < -30) {
+        f.y = height + 20;
+        f.x = Math.random() * width;
+      }
+      if (f.y > height + 30) {
+        f.y = -20;
+        f.x = Math.random() * width;
+      }
+      if (f.x < -30) f.x = width + 20;
+      if (f.x > width + 30) f.x = -20;
+
+      ctx.save();
+      ctx.translate(f.x, f.y);
+      ctx.rotate(f.rotation);
+
+      ctx.fillStyle = f.color.fill;
+      ctx.shadowColor = f.color.glow;
+      ctx.shadowBlur = 6;
+
+      if (f.type === 'heart') {
+        drawHeartShape(ctx, f.size);
+        ctx.fill();
+      } else if (f.type === 'sparkle') {
+        drawSparkleShape(ctx, f.size);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, f.size * 0.8, f.size * 0.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
+/* --------------------------------------------------------------------------
+   13. HERO SECTION FLOATING WEDDING BOUQUETS & FAIRYDUST CANVAS
+   -------------------------------------------------------------------------- */
+function initHeroFloatingCanvas() {
+  const canvas = document.getElementById('hero-floating-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth);
+  let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : window.innerHeight);
+
+  function resizeCanvas() {
+    if (!canvas.parentElement) return;
+    width = canvas.width = canvas.parentElement.offsetWidth || window.innerWidth;
+    height = canvas.height = canvas.parentElement.offsetHeight || 800;
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  setTimeout(resizeCanvas, 400);
+
+  const heroColors = [
+    { fill: 'rgba(244, 63, 94, 0.75)', shadow: 'rgba(225, 29, 72, 0.35)' },   // Soft Rose
+    { fill: 'rgba(253, 230, 138, 0.85)', shadow: 'rgba(245, 158, 11, 0.4)' }, // Gold Jasmine
+    { fill: 'rgba(251, 113, 133, 0.72)', shadow: 'rgba(244, 63, 94, 0.35)' }, // Pink Blossom
+    { fill: 'rgba(212, 175, 55, 0.8)', shadow: 'rgba(180, 130, 40, 0.35)' },  // 24K Gold Ring
+    { fill: 'rgba(255, 255, 255, 0.9)', shadow: 'rgba(254, 240, 138, 0.6)' }  // Solitaire Diamond Glow
+  ];
+
+  const items = [];
+  const totalItems = 32;
+
+  for (let i = 0; i < totalItems; i++) {
+    const type = Math.random() > 0.65 ? 'bouquet' : (Math.random() > 0.45 ? 'ring' : 'sparkle');
+    items.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: type === 'bouquet' ? (Math.random() * 9 + 10) : (type === 'ring' ? (Math.random() * 6 + 7) : (Math.random() * 5 + 4)),
+      speedY: Math.random() * 0.5 + 0.3,
+      speedX: (Math.random() - 0.5) * 0.3,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.018,
+      oscillation: Math.random() * Math.PI * 2,
+      oscSpeed: Math.random() * 0.02 + 0.01,
+      color: heroColors[Math.floor(Math.random() * heroColors.length)],
+      type: type
+    });
+  }
+
+  function drawBouquet(c, size) {
+    c.beginPath();
+    for (let i = 0; i < 5; i++) {
+      const angle = (i * Math.PI * 2) / 5;
+      const px = Math.cos(angle) * (size * 0.65);
+      const py = Math.sin(angle) * (size * 0.65);
+      c.moveTo(px, py);
+      c.arc(px, py, size * 0.45, 0, Math.PI * 2);
+    }
+    c.closePath();
+  }
+
+  function drawRing(c, size) {
+    c.beginPath();
+    c.arc(0, 0, size * 0.75, 0, Math.PI * 2);
+    c.strokeStyle = '#d4af37';
+    c.lineWidth = 2;
+    c.stroke();
+    c.beginPath();
+    c.moveTo(0, -size * 0.85);
+    c.lineTo(size * 0.35, -size * 1.15);
+    c.lineTo(0, -size * 1.45);
+    c.lineTo(-size * 0.35, -size * 1.15);
+    c.closePath();
+    c.fillStyle = '#ffffff';
+    c.fill();
+  }
+
+  function drawSparkle(c, size) {
+    c.beginPath();
+    c.moveTo(0, -size);
+    c.quadraticCurveTo(0, 0, size, 0);
+    c.quadraticCurveTo(0, 0, 0, size);
+    c.quadraticCurveTo(0, 0, -size, 0);
+    c.quadraticCurveTo(0, 0, 0, -size);
+    c.closePath();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    items.forEach(it => {
+      it.y -= it.speedY;
+      it.oscillation += it.oscSpeed;
+      it.x += Math.sin(it.oscillation) * 0.5 + it.speedX;
+      it.rotation += it.rotSpeed;
+
+      if (it.y < -30) {
+        it.y = height + 20;
+        it.x = Math.random() * width;
+      }
+      if (it.x < -30) it.x = width + 20;
+      if (it.x > width + 30) it.x = -20;
+
+      ctx.save();
+      ctx.translate(it.x, it.y);
+      ctx.rotate(it.rotation);
+
+      ctx.fillStyle = it.color.fill;
+      ctx.shadowColor = it.color.shadow;
+      ctx.shadowBlur = 6;
+
+      if (it.type === 'bouquet') {
+        drawBouquet(ctx, it.size);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(0, 0, it.size * 0.25, 0, Math.PI * 2);
+        ctx.fillStyle = '#fde047';
+        ctx.fill();
+      } else if (it.type === 'ring') {
+        drawRing(ctx, it.size);
+      } else {
+        drawSparkle(ctx, it.size);
+        ctx.fill();
+      }
+
+      ctx.restore();
     });
 
     requestAnimationFrame(draw);

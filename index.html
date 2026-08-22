@@ -166,9 +166,12 @@
   <!-- Mobile Navigation Backdrop Overlay -->
   <div class="nav-backdrop" id="nav-backdrop"></div>
 
-  <!-- 1. HERO SECTION -->
+  <!-- 1. HERO SECTION WITH FLOATING WEDDING BOUQUETS & CONFETTI CELEBRATION -->
   <section id="hero" class="hero-section" data-bg="hero">
-    <!-- SVG Floating Leaf Background Accents -->
+    <!-- Floating Wedding Bouquets, Rings & Fairydust Canvas (OVER HERO) -->
+    <canvas id="hero-floating-canvas" class="hero-floating-canvas" aria-hidden="true"></canvas>
+
+    <!-- Floating Ornamental Leaf Accents -->
     <svg class="floating-leaf-svg leaf-1" viewBox="0 0 100 100" fill="#7B8362">
       <path d="M50 0 C65 20, 90 35, 90 60 C90 80, 70 95, 50 95 C30 95, 10 80, 10 60 C10 35, 35 20, 50 0 Z" />
     </svg>
@@ -176,33 +179,93 @@
       <path d="M50 0 C65 20, 90 35, 90 60 C90 80, 70 95, 50 95 C30 95, 10 80, 10 60 C10 35, 35 20, 50 0 Z" />
     </svg>
 
+    <!-- Floating Floral Bouquet Spray 1 -->
+    <div class="floating-bouquet-ornament bouquet-left" aria-hidden="true">
+      <svg viewBox="0 0 120 120" class="bouquet-svg">
+        <circle cx="60" cy="60" r="22" fill="#fda4af" opacity="0.75"/>
+        <circle cx="45" cy="50" r="16" fill="#f43f5e" opacity="0.65"/>
+        <circle cx="75" cy="50" r="16" fill="#fb7185" opacity="0.65"/>
+        <circle cx="60" cy="38" r="14" fill="#ffe4e6" opacity="0.85"/>
+        <path d="M30 75 Q15 60 25 45 Q40 55 30 75 Z" fill="#4d7c0f" opacity="0.7"/>
+        <path d="M90 75 Q105 60 95 45 Q80 55 90 75 Z" fill="#4d7c0f" opacity="0.7"/>
+        <circle cx="60" cy="60" r="6" fill="#d4af37"/>
+      </svg>
+    </div>
+
+    <!-- Floating Floral Bouquet Spray 2 -->
+    <div class="floating-bouquet-ornament bouquet-right" aria-hidden="true">
+      <svg viewBox="0 0 120 120" class="bouquet-svg">
+        <circle cx="60" cy="60" r="20" fill="#fde047" opacity="0.75"/>
+        <circle cx="48" cy="48" r="15" fill="#f59e0b" opacity="0.7"/>
+        <circle cx="72" cy="48" r="15" fill="#d97706" opacity="0.7"/>
+        <path d="M25 80 Q10 65 20 50 Q35 60 25 80 Z" fill="#2d6a4f" opacity="0.7"/>
+        <path d="M95 80 Q110 65 100 50 Q85 60 95 80 Z" fill="#2d6a4f" opacity="0.7"/>
+        <circle cx="60" cy="60" r="5" fill="#ffffff"/>
+      </svg>
+    </div>
+
     <div class="container">
       <div class="hero-grid">
         <div class="hero-text-content" data-animate="fade-right">
+          <div class="hero-shubh-crest">
+            <span class="crest-decor">❖</span>
+            <span>॥ शुभ विवाह ॥</span>
+            <span class="crest-decor">❖</span>
+          </div>
+
           <div class="hero-monogram-badge">
             <i class="fas fa-heart" style="color: var(--accent-gold-dark);"></i>
             <span>TOGETHER WITH THEIR FAMILIES</span>
           </div>
+          
           <span class="hero-greeting script-text">Welcome to the Wedding of</span>
+          
           <h1 class="hero-title">
-            Jaydeep <span>&</span> Rishika
+            Jaydeep <span class="hero-ampersand">&amp;</span> Rishika
           </h1>
+
           <div class="hero-date-badge">
+            <i class="far fa-calendar-check" style="color: var(--accent-gold-dark); margin-right: 4px;"></i>
             <span> 10 February 2027</span>
             <div class="divider-dot"></div>
+            <i class="fas fa-location-dot" style="color: var(--accent-gold-dark); margin-right: 4px;"></i>
             <span>MANGRUL, KHARGONE</span>
           </div>
+
           <div class="hero-cta-group">
-            <a href="#envelope-section" class="btn-primary">
+            <a href="#envelope-section" class="btn-primary hero-btn-pulse">
               <i class="fas fa-envelope-open-text"></i> Open Invitation
+            </a>
+            <a href="#events" class="btn-secondary">
+              <i class="fas fa-calendar-alt"></i> View Ceremonies
             </a>
           </div>
         </div>
 
         <div class="hero-image-wrapper" data-animate="fade-left" data-delay="200">
+          <div class="hero-halo-glow" aria-hidden="true"></div>
+          
+          <!-- Floral Garland Top Crown Arch -->
+          <div class="hero-frame-garland" aria-hidden="true">
+            <svg viewBox="0 0 300 60" class="garland-svg">
+              <path d="M20 45 Q150 -10 280 45" fill="none" stroke="#d4af37" stroke-width="2.5" stroke-dasharray="4 2"/>
+              <circle cx="150" cy="12" r="10" fill="#f43f5e"/>
+              <circle cx="150" cy="12" r="4" fill="#fde047"/>
+              <circle cx="110" cy="18" r="8" fill="#f59e0b"/>
+              <circle cx="190" cy="18" r="8" fill="#f59e0b"/>
+              <circle cx="70" cy="28" r="7" fill="#fb7185"/>
+              <circle cx="230" cy="28" r="7" fill="#fb7185"/>
+            </svg>
+          </div>
+
           <div class="hero-image-frame">
-            <img src="assets/images/hero_couple.png" alt="Eleanor and Alexander Wedding Couple">
-            <div class="hero-photo-tag">Forever Starts Here</div>
+            <div class="frame-corner-gold top-l"></div>
+            <div class="frame-corner-gold top-r"></div>
+            <img src="assets/images/hero_couple.png" alt="Jaydeep and Rishika Wedding Couple">
+            <div class="hero-photo-tag">
+              <i class="fas fa-heart" style="color: #e11d48; font-size: 1.1rem; margin-right: 6px;"></i>
+              Forever Starts Here
+            </div>
           </div>
         </div>
       </div>
@@ -251,125 +314,408 @@
     </div>
   </section>
 
-  <!-- 3. LOVE STORY TIMELINE -->
+  <!-- 3. ROMANTIC VALENTINE LOVE STORY TIMELINE -->
   <section id="story" class="story-section" data-bg="story">
+    <!-- Floating Valentine Hearts & Romantic Sparkles Canvas (Floats Over Cards) -->
+    <canvas id="story-valentine-canvas" class="story-valentine-canvas" aria-hidden="true"></canvas>
+
     <div class="container">
-      <div class="section-subtitle">How It All Began</div>
-      <h2 class="section-title">Our Love Story</h2>
+      <div class="valentine-header" data-animate="fade-up">
+        <div class="valentine-love-badge">
+          <i class="fas fa-heart heart-pulse"></i>
+          <span>With Every Beat Of Our Hearts</span>
+          <i class="fas fa-heart heart-pulse"></i>
+        </div>
+        <div class="section-subtitle">A Journey Written In The Stars</div>
+        <h2 class="section-title">Our Love Story</h2>
+        <div class="valentine-ribbon-divider">
+          <span class="v-line"></span>
+          <span class="v-heart"><i class="fas fa-infinity"></i> <i class="fas fa-heart"></i></span>
+          <span class="v-line"></span>
+        </div>
+      </div>
 
       <div class="timeline">
-        <!-- Item 1 -->
+        <!-- Milestone 1 -->
         <div class="timeline-item" data-animate="fade-right">
-          <div class="timeline-node"></div>
-          <div class="timeline-card">
+          <div class="timeline-node">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="timeline-card valentine-card">
+            <div class="card-love-pattern" aria-hidden="true"></div>
+            <div class="card-corner-heart top-left">❤</div>
+            <div class="card-corner-heart top-right">❤</div>
+            
+            <div class="milestone-badge">
+              <i class="fas fa-sparkles"></i> <span>Chapter I</span>
+            </div>
             <div class="story-date">Summer 2020</div>
-            <h3 class="story-title">How We Met</h3>
+            <h3 class="story-title">When Destiny Smiled</h3>
             <p class="story-desc">
-              A chance encounter at a sunlit coastal bookstore in Florence. One shared smile over classical poetry
-              sparked a conversation that hasn't ended since.
+              A magical encounter that sparked a timeless connection. One shared glance and an unforgettable conversation began a journey of two hearts destined for each other.
             </p>
+            <div class="card-love-tag">
+              <i class="fas fa-quote-left"></i> <span>First Glance, Forever Love</span>
+            </div>
           </div>
         </div>
 
-        <!-- Item 2 -->
+        <!-- Milestone 2 -->
         <div class="timeline-item" data-animate="fade-left">
-          <div class="timeline-node"></div>
-          <div class="timeline-card">
+          <div class="timeline-node">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="timeline-card valentine-card">
+            <div class="card-love-pattern" aria-hidden="true"></div>
+            <div class="card-corner-heart top-left">❤</div>
+            <div class="card-corner-heart top-right">❤</div>
+
+            <div class="milestone-badge">
+              <i class="fas fa-coffee"></i> <span>Chapter II</span>
+            </div>
             <div class="story-date">Autumn 2021</div>
-            <h3 class="story-title">First Date & Coffee</h3>
+            <h3 class="story-title">Coffee, Walks & Endless Talks</h3>
             <p class="story-desc">
-              Hours turned into moments at a hidden garden café. We realized we shared the exact same dreams, passion
-              for travel, and love for silent evening walks.
+              Under golden autumn skies, hours effortlessly turned into unforgettable moments. Over warm coffees and silent evening walks, we realized our souls had found their true home.
             </p>
+            <div class="card-love-tag">
+              <i class="fas fa-quote-left"></i> <span>Finding Home In Each Other</span>
+            </div>
           </div>
         </div>
 
-        <!-- Item 3 -->
+        <!-- Milestone 3 -->
         <div class="timeline-item" data-animate="fade-right">
-          <div class="timeline-node"></div>
-          <div class="timeline-card">
+          <div class="timeline-node">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="timeline-card valentine-card">
+            <div class="card-love-pattern" aria-hidden="true"></div>
+            <div class="card-corner-heart top-left">❤</div>
+            <div class="card-corner-heart top-right">❤</div>
+
+            <div class="milestone-badge">
+              <i class="fas fa-ring"></i> <span>Chapter III</span>
+            </div>
             <div class="story-date">Spring 2024</div>
-            <h3 class="story-title">The Proposal in Venice</h3>
+            <h3 class="story-title">The Dream Proposal</h3>
             <p class="story-desc">
-              Under the golden glow of a Venetian sunset, aboard a private wooden gondola, Alexander got down on one
-              knee. With tears of joy, Eleanor said "Yes!"
+              Under the warm golden glow of a fairytale sunset, Jaydeep got down on one knee with a ring that symbolized forever. With tears of pure happiness, Rishika whispered "Yes!"
             </p>
+            <div class="card-love-tag">
+              <i class="fas fa-quote-left"></i> <span>A Million Times Yes!</span>
+            </div>
           </div>
         </div>
 
-        <!-- Item 4 -->
+        <!-- Milestone 4 -->
         <div class="timeline-item" data-animate="fade-left">
-          <div class="timeline-node"></div>
-          <div class="timeline-card">
-            <div class="story-date">October 2026</div>
-            <h3 class="story-title">The Beginning of Forever</h3>
+          <div class="timeline-node">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="timeline-card valentine-card">
+            <div class="card-love-pattern" aria-hidden="true"></div>
+            <div class="card-corner-heart top-left">❤</div>
+            <div class="card-corner-heart top-right">❤</div>
+
+            <div class="milestone-badge">
+              <i class="fas fa-dove"></i> <span>Chapter IV</span>
+            </div>
+            <div class="story-date">February 2027</div>
+            <h3 class="story-title">Two Souls, One Heart</h3>
             <p class="story-desc">
-              Surrounded by our loved ones in the heart of Indore, we take the vow to walk hand in hand through all of
-              life's beautiful adventures.
+              Surrounded by our loved ones in Mangrul, Khargone, we take sacred vows to walk hand in hand through all of life’s beautiful adventures, celebrating a lifetime of endless love.
             </p>
+            <div class="card-love-tag">
+              <i class="fas fa-quote-left"></i> <span>The Beginning of Forever</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. WEDDING EVENTS SECTION -->
+  <!-- 4. WEDDING EVENTS SECTION (INDIAN WEDDING CELEBRATION) -->
   <section id="events" class="events-section" data-bg="events">
-    <div class="container">
-      <div class="section-subtitle">Join The Celebrations</div>
-      <h2 class="section-title">Wedding Events</h2>
+    <!-- Floating Rose & Marigold Petals Canvas -->
+    <canvas id="events-petals-canvas" class="events-petals-canvas" aria-hidden="true"></canvas>
 
-      <div class="events-grid"></div>
-      <!-- Mehendi -->
-      <div class="event-card" data-animate="fade-up" data-delay="100">
-        <div class="event-icon"><i class="fas fa-hands-sparkles"></i></div>
-        <h3 class="event-name">Mehendi Ceremony</h3>
-        <div class="event-date-time">OCT 22, 2026 • 4:00 PM</div>
-        <div class="event-venue"><i class="fas fa-location-dot"></i> Olive Garden Terrace, Villa d'Este</div>
-        <div class="event-dress-code">Dress Code: Floral & Botanical Chic</div>
-        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
-      </div>
-
-      <!-- Haldi -->
-      <div class="event-card" data-animate="fade-up" data-delay="200">
-        <div class="event-icon"><i class="fas fa-sun"></i></div>
-        <h3 class="event-name">Haldi Celebration</h3>
-        <div class="event-date-time">OCT 23, 2026 • 10:00 AM</div>
-        <div class="event-venue"><i class="fas fa-location-dot"></i> Sunken Courtyard, Villa d'Este</div>
-        <div class="event-dress-code">Dress Code: Shades of Gold & Sunshine Yellow</div>
-        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
-      </div>
-
-      <!-- Sangeet -->
-      <div class="event-card" data-animate="fade-up" data-delay="300">
-        <div class="event-icon"><i class="fas fa-music"></i></div>
-        <h3 class="event-name">Sangeet Night</h3>
-        <div class="event-date-time">OCT 23, 2026 • 7:00 PM</div>
-        <div class="event-venue"><i class="fas fa-location-dot"></i> Grand Imperial Ballroom</div>
-        <div class="event-dress-code">Dress Code: Royal Glamour & Shimmering Attire</div>
-        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
-      </div>
-
-      <!-- Wedding Ceremony -->
-      <div class="event-card" data-animate="fade-up" data-delay="400">
-        <div class="event-icon"><i class="fas fa-ring"></i></div>
-        <h3 class="event-name">Holy Matrimony</h3>
-        <div class="event-date-time">OCT 24, 2026 • 10:00 AM</div>
-        <div class="event-venue"><i class="fas fa-location-dot"></i> Lakeside Amphitheater</div>
-        <div class="event-dress-code">Dress Code: Formal Luxury / Pastel Elegance</div>
-        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
-      </div>
-
-      <!-- Reception -->
-      <div class="event-card" data-animate="fade-up" data-delay="500">
-        <div class="event-icon"><i class="fas fa-glass-cheers"></i></div>
-        <h3 class="event-name">Grand Reception</h3>
-        <div class="event-date-time">OCT 24, 2026 • 7:00 PM</div>
-        <div class="event-venue"><i class="fas fa-location-dot"></i> Belvedere Palace Gardens</div>
-        <div class="event-dress-code">Dress Code: Black Tie Optional</div>
-        <a href="#venue" class="btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">View Location</a>
-      </div>
+    <!-- Traditional Indian Marigold & Mango Leaf Floral Toran Garland -->
+    <div class="toran-garland-wrapper" aria-hidden="true">
+      <svg class="toran-garland-svg" viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path d="M0,0 Q180,60 360,0 Q540,60 720,0 Q900,60 1080,0 Q1260,60 1440,0" fill="none" stroke="#d48b0c" stroke-width="3" stroke-dasharray="4 2"/>
+        <!-- Toran Marigold & Mango Leaves -->
+        <g fill="#f59e0b" stroke="#b45309" stroke-width="1">
+          <circle cx="180" cy="40" r="14"/>
+          <circle cx="540" cy="40" r="14"/>
+          <circle cx="900" cy="40" r="14"/>
+          <circle cx="1260" cy="40" r="14"/>
+        </g>
+        <g fill="#2d6a4f">
+          <path d="M180,54 Q190,80 180,85 Q170,80 180,54 Z"/>
+          <path d="M540,54 Q550,80 540,85 Q530,80 540,54 Z"/>
+          <path d="M900,54 Q910,80 900,85 Q890,80 900,54 Z"/>
+          <path d="M1260,54 Q1270,80 1260,85 Q1250,80 1260,54 Z"/>
+        </g>
+      </svg>
     </div>
+
+    <div class="container">
+      <div class="shubh-blessing-header" data-animate="fade-up">
+        <div class="ganesh-shlok">॥ श्री गणेशाय नमः ॥</div>
+        <div class="section-subtitle">Mangal Karyakram • Sacred Festivities</div>
+        <h2 class="section-title">Wedding Ceremonies</h2>
+        <div class="gold-ornament-divider">
+          <span class="divider-line"></span>
+          <span class="divider-om">ॐ</span>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+
+      <div class="events-grid">
+        <!-- 1. MEHENDI CEREMONY -->
+        <div class="event-card event-card--mehendi" data-animate="fade-up" data-delay="100">
+          <!-- Themed Henna Artwork Pattern Background -->
+          <div class="card-themed-pattern mehendi-pattern" aria-hidden="true"></div>
+          
+          <!-- Royal Indian Arch Top & Corner Motifs -->
+          <div class="royal-arch-header"></div>
+          <div class="card-corner-motif top-left"></div>
+          <div class="card-corner-motif top-right"></div>
+          
+          <!-- Central Themed Henna Paisley Artwork Illustration -->
+          <div class="card-art-illustration mehendi-art" aria-hidden="true">
+            <svg viewBox="0 0 100 100" class="art-svg">
+              <path d="M50 15 C35 15 25 28 25 45 C25 65 40 75 50 90 C60 75 75 65 75 45 C75 28 65 15 50 15 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="50" cy="45" r="14" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+              <circle cx="50" cy="45" r="6" fill="currentColor" opacity="0.3"/>
+              <path d="M50 31 C56 31 60 35 60 41 C60 47 54 51 50 51 C46 51 40 47 40 41 C40 35 44 31 50 31" fill="none" stroke="currentColor" stroke-width="1"/>
+              <path d="M32 40 Q20 50 30 65 Q40 75 50 82 Q60 75 70 65 Q80 50 68 40" fill="none" stroke="currentColor" stroke-width="1.2"/>
+              <circle cx="50" cy="22" r="3" fill="currentColor"/>
+              <circle cx="36" cy="32" r="2.5" fill="currentColor"/>
+              <circle cx="64" cy="32" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+
+          <div class="event-shubh-badge">॥ शुभ मेहंदी ॥</div>
+          
+          <div class="event-icon-wrapper">
+            <div class="event-icon">
+              <i class="fas fa-hand-sparkles"></i>
+            </div>
+          </div>
+
+          <h3 class="event-name">Mehendi Ceremony</h3>
+          <div class="event-tagline">"Rang Barse • Traditional Henna & Folk Sangeet"</div>
+
+          <div class="event-date-time">
+            <i class="far fa-calendar-alt"></i> FEB 08, 2027 • 04:00 PM
+          </div>
+
+          <div class="event-venue">
+            <i class="fas fa-location-dot"></i> Royal Courtyard, Mangrul
+          </div>
+
+          <div class="event-dress-code">
+            <span class="dress-label">Poshak:</span> Floral Lehengas &amp; Ethnic Green Kurta
+          </div>
+        </div>
+
+        <!-- 2. HALDI UTSAV -->
+        <div class="event-card event-card--haldi" data-animate="fade-up" data-delay="200">
+          <!-- Themed Marigold Floral Pattern Background -->
+          <div class="card-themed-pattern haldi-pattern" aria-hidden="true"></div>
+          
+          <!-- Royal Indian Arch Top & Corner Motifs -->
+          <div class="royal-arch-header"></div>
+          <div class="card-corner-motif top-left"></div>
+          <div class="card-corner-motif top-right"></div>
+          
+          <!-- Central Themed Marigold Flower Artwork Illustration -->
+          <div class="card-art-illustration haldi-art" aria-hidden="true">
+            <svg viewBox="0 0 100 100" class="art-svg">
+              <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <g stroke="currentColor" stroke-width="1.5" fill="none">
+                <path d="M50 12 Q58 30 50 40 Q42 30 50 12 Z"/>
+                <path d="M50 88 Q58 70 50 60 Q42 70 50 88 Z"/>
+                <path d="M12 50 Q30 58 40 50 Q30 42 12 50 Z"/>
+                <path d="M88 50 Q70 58 60 50 Q70 42 88 50 Z"/>
+                <path d="M23 23 Q40 35 43 43 Q35 40 23 23 Z"/>
+                <path d="M77 77 Q60 65 57 57 Q65 60 77 77 Z"/>
+                <path d="M77 23 Q65 35 57 43 Q60 35 77 23 Z"/>
+                <path d="M23 77 Q35 65 43 57 Q35 60 23 77 Z"/>
+              </g>
+              <circle cx="50" cy="50" r="10" fill="currentColor" opacity="0.25"/>
+            </svg>
+          </div>
+
+          <div class="event-shubh-badge">॥ शुभ हल्दी ॥</div>
+
+          <div class="event-icon-wrapper">
+            <div class="event-icon">
+              <i class="fas fa-sun"></i>
+            </div>
+          </div>
+
+          <h3 class="event-name">Haldi Utsav</h3>
+          <div class="event-tagline">"Pithi &amp; Ubtan • Marigold &amp; Saffron Sunshine Glow"</div>
+
+          <div class="event-date-time">
+            <i class="far fa-calendar-alt"></i> FEB 09, 2027 • 10:00 AM
+          </div>
+
+          <div class="event-venue">
+            <i class="fas fa-location-dot"></i> Sunlit Palace Garden, Khargone
+          </div>
+
+          <div class="event-dress-code">
+            <span class="dress-label">Poshak:</span> Shades of Kesariya &amp; Sunshine Yellow
+          </div>
+        </div>
+
+        <!-- 3. SANGEET SANDHYA -->
+        <div class="event-card event-card--sangeet" data-animate="fade-up" data-delay="300">
+          <!-- Themed Dholak & Musical Tapestry Pattern Background -->
+          <div class="card-themed-pattern sangeet-pattern" aria-hidden="true"></div>
+          
+          <!-- Royal Indian Arch Top & Corner Motifs -->
+          <div class="royal-arch-header"></div>
+          <div class="card-corner-motif top-left"></div>
+          <div class="card-corner-motif top-right"></div>
+          
+          <!-- Central Themed Dholak & Shehnai Artwork Illustration -->
+          <div class="card-art-illustration sangeet-art" aria-hidden="true">
+            <svg viewBox="0 0 100 100" class="art-svg">
+              <path d="M28 35 Q50 28 72 35 L72 65 Q50 72 28 65 Z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <ellipse cx="28" cy="50" rx="6" ry="15" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <ellipse cx="72" cy="50" rx="6" ry="15" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M28 35 L50 69 L72 35" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+              <path d="M28 65 L50 31 L72 65" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+              <circle cx="20" cy="25" r="2.5" fill="currentColor"/>
+              <circle cx="80" cy="25" r="2.5" fill="currentColor"/>
+              <path d="M15 70 Q25 78 20 85" fill="none" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M85 70 Q75 78 80 85" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </div>
+
+          <div class="event-shubh-badge">॥ संगीत संध्या ॥</div>
+
+          <div class="event-icon-wrapper">
+            <div class="event-icon">
+              <i class="fas fa-music"></i>
+            </div>
+          </div>
+
+          <h3 class="event-name">Sangeet &amp; Dhol Night</h3>
+          <div class="event-tagline">"Raas, Dandiya &amp; Royal Melodies Celebration"</div>
+
+          <div class="event-date-time">
+            <i class="far fa-calendar-alt"></i> FEB 09, 2027 • 07:00 PM
+          </div>
+
+          <div class="event-venue">
+            <i class="fas fa-location-dot"></i> Grand Heritage Ballroom, Khargone
+          </div>
+
+          <div class="event-dress-code">
+            <span class="dress-label">Poshak:</span> Royal Rani Pink &amp; Shimmering Indo-Western
+          </div>
+        </div>
+
+        <!-- 4. SHUBH VIVAH / SAAT PHERE -->
+        <div class="event-card event-card--ceremony" data-animate="fade-up" data-delay="400">
+          <!-- Themed Sacred Vedic Mandap Pattern Background -->
+          <div class="card-themed-pattern vivah-pattern" aria-hidden="true"></div>
+          
+          <!-- Royal Indian Arch Top & Corner Motifs -->
+          <div class="royal-arch-header"></div>
+          <div class="card-corner-motif top-left"></div>
+          <div class="card-corner-motif top-right"></div>
+          
+          <!-- Central Themed Sacred Agni Kund Artwork Illustration -->
+          <div class="card-art-illustration vivah-art" aria-hidden="true">
+            <svg viewBox="0 0 100 100" class="art-svg">
+              <path d="M25 75 L75 75 L68 62 L32 62 Z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M30 62 L70 62 L64 52 L36 52 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M50 20 Q58 35 50 48 Q42 35 50 20 Z" fill="currentColor" opacity="0.35"/>
+              <path d="M44 32 Q50 42 42 50 Q36 40 44 32 Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M56 32 Q50 42 58 50 Q64 40 56 32 Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="50" cy="48" r="38" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 3"/>
+            </svg>
+          </div>
+
+          <div class="event-shubh-badge">॥ शुभ विवाह - पाणिग्रहण ॥</div>
+
+          <div class="event-icon-wrapper">
+            <div class="event-icon">
+              <i class="fas fa-fire-alt"></i>
+            </div>
+          </div>
+
+          <h3 class="event-name">Shubh Vivah &amp; Saat Phere</h3>
+          <div class="event-tagline">"Holy Matrimony &amp; Sacred Vows around the Agni"</div>
+
+          <div class="event-date-time">
+            <i class="far fa-calendar-alt"></i> FEB 10, 2027 • 05:00 AM
+          </div>
+
+          <div class="event-venue">
+            <i class="fas fa-location-dot"></i> Royal Mandapam, Mangrul
+          </div>
+
+          <div class="event-dress-code">
+            <span class="dress-label">Poshak:</span> Traditional Silk Sarees &amp; Royal Sherwani
+          </div>
+        </div>
+
+        <!-- 5. GRAND RECEPTION -->
+        <div class="event-card event-card--reception" data-animate="fade-up" data-delay="500">
+          <!-- Themed Royal Peacock Feather Pattern Background -->
+          <div class="card-themed-pattern reception-pattern" aria-hidden="true"></div>
+          
+          <!-- Royal Indian Arch Top & Corner Motifs -->
+          <div class="royal-arch-header"></div>
+          <div class="card-corner-motif top-left"></div>
+          <div class="card-corner-motif top-right"></div>
+          
+          <!-- Central Themed Royal Peacock Feather Artwork Illustration -->
+          <div class="card-art-illustration reception-art" aria-hidden="true">
+            <svg viewBox="0 0 100 100" class="art-svg">
+              <ellipse cx="50" cy="38" rx="20" ry="24" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <ellipse cx="50" cy="40" rx="13" ry="16" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <ellipse cx="50" cy="43" rx="7" ry="9" fill="currentColor" opacity="0.3"/>
+              <path d="M50 14 L50 86" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M35 30 Q25 22 18 20 M65 30 Q75 22 82 20" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M32 45 Q20 40 14 42 M68 45 Q80 40 86 42" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M35 60 Q22 62 16 68 M65 60 Q78 62 84 68" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M40 72 Q30 78 24 85 M60 72 Q70 78 76 85" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </div>
+
+          <div class="event-shubh-badge">॥ शुभ आशीर्वाद ॥</div>
+
+          <div class="event-icon-wrapper">
+            <div class="event-icon">
+              <i class="fas fa-crown"></i>
+            </div>
+          </div>
+
+          <h3 class="event-name">Royal Reception</h3>
+          <div class="event-tagline">"Feast, Family Blessings &amp; Musical Felicitation"</div>
+
+          <div class="event-date-time">
+            <i class="far fa-calendar-alt"></i> FEB 10, 2027 • 07:30 PM
+          </div>
+
+          <div class="event-venue">
+            <i class="fas fa-location-dot"></i> Royal Palace Banquet Gardens
+          </div>
+
+          <div class="event-dress-code">
+            <span class="dress-label">Poshak:</span> Royal Formals &amp; Elegant Traditional
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -406,18 +752,11 @@
       <div class="section-subtitle">Memories & Moments</div>
       <h2 class="section-title">Photo Gallery</h2>
 
-      <div class="gallery-filters" data-animate="fade-up">
-        <button class="filter-btn active" data-filter="all">All Photos</button>
-        <button class="filter-btn" data-filter="couple">Couple</button>
-        <button class="filter-btn" data-filter="ceremony">Ceremony</button>
-        <button class="filter-btn" data-filter="details">Details</button>
-      </div>
-
       <div class="gallery-grid">
         <!-- Item 1 -->
-        <div class="gallery-item tall" data-category="couple" data-caption="Eleanor & Alexander Editorial Portrait"
-          data-animate="fade-up">
-          <img src="assets/images/hero_couple.png" alt="Editorial Couple Portrait">
+        <div class="gallery-item tall" data-category="couple" data-caption="Jaydeep & Rishika Editorial Portrait"
+          data-delay="0">
+          <img src="assets/images/hero_couple.png" alt="Jaydeep and Rishika Couple Portrait">
           <div class="gallery-overlay">
             <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
             <div class="gallery-caption">Together Forever</div>
@@ -426,7 +765,7 @@
 
         <!-- Item 2 -->
         <div class="gallery-item" data-category="details" data-caption="Gold & Diamond Wedding Rings"
-          data-animate="fade-up" data-delay="100">
+          data-delay="150">
           <img src="assets/images/wedding_rings.png" alt="Wedding Rings">
           <div class="gallery-overlay">
             <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
@@ -435,18 +774,18 @@
         </div>
 
         <!-- Item 3 -->
-        <div class="gallery-item" data-category="ceremony" data-caption="Indore Venue at Sunset" data-animate="fade-up"
-          data-delay="200">
+        <div class="gallery-item" data-category="ceremony" data-caption="Khargone Heritage Venue"
+          data-delay="300">
           <img src="assets/images/wedding_venue.png" alt="Wedding Estate Venue">
           <div class="gallery-overlay">
             <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
-            <div class="gallery-caption">Indore Venue</div>
+            <div class="gallery-caption">Khargone Venue</div>
           </div>
         </div>
 
         <!-- Item 4 -->
-        <div class="gallery-item" data-category="couple" data-caption="Polaroid Tender Moments" data-animate="fade-up"
-          data-delay="300">
+        <div class="gallery-item" data-category="couple" data-caption="Tender Moments of Pure Joy"
+          data-delay="100">
           <img src="assets/images/envelope_couple.png" alt="Couple Embrace">
           <div class="gallery-overlay">
             <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
@@ -455,12 +794,22 @@
         </div>
 
         <!-- Item 5 -->
-        <div class="gallery-item" data-category="details" data-caption="Luxury Floral Table Setup"
-          data-animate="fade-up" data-delay="400">
+        <div class="gallery-item" data-category="ceremony" data-caption="Royal Floral Mandap Décor"
+          data-delay="250">
           <img src="assets/images/wedding_venue.png" alt="Floral Table Detail">
           <div class="gallery-overlay">
             <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
-            <div class="gallery-caption">Floral Table Décor</div>
+            <div class="gallery-caption">Royal Mandap Décor</div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="gallery-item" data-category="details" data-caption="Sacred Zari & Heirloom Details"
+          data-delay="400">
+          <img src="assets/images/wedding_rings.png" alt="Wedding Details">
+          <div class="gallery-overlay">
+            <div class="gallery-icon"><i class="fas fa-search-plus"></i></div>
+            <div class="gallery-caption">Sacred Heirlooms</div>
           </div>
         </div>
       </div>
@@ -485,48 +834,27 @@
   <!-- 7. VENUE & LOCATION SECTION -->
   <section id="venue" class="venue-section" data-bg="venue">
     <div class="container">
-      <div class="section-subtitle">Location & Directions</div>
-      <h2 class="section-title">The Destination</h2>
+      <div class="section-subtitle destination-subtitle">DESTINATION</div>
+      <h2 class="section-title venue-main-title">Venue &amp; Location</h2>
 
-      <div class="venue-grid">
-        <div class="venue-card" data-animate="fade-right">
-          <h3 class="venue-title"> Khargone</h3>
-          <div class="venue-address">
-          </div>
-          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
-          </p>
-          <div
-            style="background: rgba(123, 131, 98, 0.08); padding: 1.2rem; border-radius: var(--radius-sm); margin-bottom: 1.8rem; border-left: 3px solid var(--primary-olive);">
-            <div
-              style="font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-olive-dark);">
-              Guest Accommodations</div>
-            <div style="font-size: 0.88rem; color: var(--text-muted);">Special room rate codes available upon booking.
-              Complimentary private shuttle service provided from Milan Malpensa Airport.</div>
-          </div>
-          <a href="https://maps.google.com/?q=Khargone+India" target="_blank" rel="noopener noreferrer"
-            class="btn-primary">
-            <i class="fas fa-directions"></i> Get Directions
-          </a>
-        </div>
-
-        <div class="venue-map-container" data-animate="fade-left">
-          <div class="venue-map-wrapper">
-            <iframe src="https://www.google.com/maps?q=Khargone+India&output=embed" allowfullscreen="" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade" title="Khargone">
-            </iframe>
-            <div class="venue-map-overlay">
-              <div class="venue-map-info">
-                <span class="venue-map-label">Venue</span>
-                <span class="venue-map-name">Khargone Celebration Venue</span>
-                <span class="venue-map-location">Khargone, India</span>
-              </div>
-              <a href="https://maps.google.com/?q=Khargone+India" target="_blank" rel="noopener noreferrer"
-                class="venue-map-button">
-                <i class="fas fa-directions"></i> Get Directions
-              </a>
-              <a href="https://maps.google.com/?q=Khargone+India" target="_blank" rel="noopener noreferrer"
-                class="venue-map-link-mobile" aria-label="Get directions to Khargone"></a>
+      <div class="destination-card" data-animate="fade-up">
+        <div class="destination-card-grid">
+          <!-- Left Column: Image and Address -->
+          <div class="dest-col-left">
+            <div class="dest-image-wrapper">
+              <img src="assets/images/wedding_venue.png" alt="The Royal Palace Venue">
             </div>
+            <p class="dest-address-text">
+              Palace Grounds, MG Road, Indore, Madhya Pradesh<br>452001, India
+            </p>
+          </div>
+
+          <!-- Right Column: Title and Get Directions Button -->
+          <div class="dest-col-right">
+            <h3 class="dest-venue-name">The Royal Palace</h3>
+            <a href="https://maps.google.com/?q=Palace+Grounds+MG+Road+Indore+Madhya+Pradesh+452001" target="_blank" rel="noopener noreferrer" class="btn-dest-directions">
+              <span class="pin-icon">📍</span> GET DIRECTIONS
+            </a>
           </div>
         </div>
       </div>
